@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -ueo pipefail
+
+# setup a user with the same userid as /myapp/config.xml
+
+# if we have files in our directory, fix'em all up
+if [ -e "/myapp/config.xml" ]; then
+	uid=$(stat -c %u /myapp/config.xml)
+	gid=$(stat -c %g /myapp/config.xml)
+	chown -R $uid:$gid /myapp
+	groupadd -g $gid ionic || true
+	useradd -M -u $uid -g $gid ionic || true
+fi
+
+case "$1" in
+	bash)
+	cat <<dog
+ionic(){
+	docker run --rm -t -i -v \$PWD:/myapp -p 8100:8100 -p 35729:35729 brimstone/ionic "\$@"
+}
+dog
+exit
+	;;
+	root)
+	exec /bin/bash
+	;;
+	-)
+	exec su ionic -c /bin/bash
+	;;
+	*)
+	cd /myapp
+	echo exec su ionic -c ionic "$@"
+	exec su ionic -c "ionic $@"
+esac

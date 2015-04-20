@@ -24,3 +24,9 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/andro
 RUN printf "y\n" \
 	| /opt/android-sdk-linux/tools/android update sdk --no-ui \
 		--filter android-21,build-tools-22.0.1,tools,platform-tools
+
+COPY loader /
+ENTRYPOINT ["/loader"]
+
+EXPOSE 8100
+EXPOSE 35729
