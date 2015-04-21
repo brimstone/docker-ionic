@@ -31,9 +31,9 @@ case "$VERB" in
 	cat <<dog
 ionic(){
 	docker run --rm -t -i \
-	-e DISPLAY=unix\$DISPLAY \
+	-e "DISPLAY=unix\$DISPLAY" \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-v \$PWD:/myapp \
+	-v "\$PWD:/myapp" \
 	-p 8100:8100 -p 35729:35729 \
 	brimstone/ionic "\$@"
 }
