@@ -4,16 +4,23 @@ set -ueo pipefail
 
 # setup a user with the same userid as /myapp/config.xml
 
-mkuser(){
-# if we have files in our directory, fix'em all up
-if [ -e "/myapp/config.xml" ]; then
-	uid=$(stat -c %u /myapp/config.xml)
-	gid=$(stat -c %g /myapp/config.xml)
+
+# fix'em all up
+mkuser() {
+if [ -d "/myapp" ]; then
+	uid=$(stat -c %u /myapp)
+	gid=$(stat -c %g /myapp)
 	chown -R "$uid:$gid" /myapp
 	groupadd -g "$gid" ionic || true
 	useradd -M -u "$uid" -g "$gid" -d /myapp ionic || true
 else
-	echo "No config.xml file found, this may not be a project directory." >&2
+	cat <<dog
+Usage:
+\$ eval "\$(docker run --rm brimstone/ionic bash")"
+
+Then use \`ionic\` as normal.
+dog
+	exit 1
 fi
 }
 
@@ -37,11 +44,8 @@ exit
 	exec /bin/bash
 	;;
 	"")
+	mkuser
 	exec su ionic -c /bin/bash
-	;;
-	start)
-	cd /myapp
-	ionic "$@"
 	;;
 	*)
 	mkuser
