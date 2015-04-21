@@ -1,5 +1,10 @@
 FROM brimstone/ubuntu:14.04
 
+EXPOSE 8100
+EXPOSE 35729
+
+ENTRYPOINT ["/loader"]
+
 # install packages we need on the system
 RUN dpkg --add-architecture i386 \
  && echo "deb [arch=i386] http://us.archive.ubuntu.com/ubuntu trusty main restricted multiverse universe" > /etc/apt/sources.list.d/i386.list \
@@ -26,7 +31,3 @@ RUN printf "y\n" \
 		--filter android-16,build-tools-22.0.1,tools,platform-tools
 
 COPY loader /
-ENTRYPOINT ["/loader"]
-
-EXPOSE 8100
-EXPOSE 35729
