@@ -20,10 +20,10 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools
 
-# download stuff for platform 4.0 - 14
+# download stuff for platform 4.1 - 16
 RUN printf "y\n" \
 	| /opt/android-sdk-linux/tools/android update sdk --no-ui \
-		--filter android-21,build-tools-22.0.1,tools,platform-tools
+		--filter android-16,build-tools-22.0.1,tools,platform-tools
 
 COPY loader /
 ENTRYPOINT ["/loader"]
