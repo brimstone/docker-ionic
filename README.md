@@ -10,11 +10,13 @@ This container comes fully loaded with:
 - ionic
 - cordova
 - android sdk
-- android-21 platform
-- 
+- android-16 platform (based on [device usage](https://developer.android.com/about/dashboards/index.html))
 
 Usage
 -----
 For maximum fun: `eval "$(docker run --rm brimstone/ionic bash)"`
 Then call `ionic` as you normally would.
 
+Building
+--------
+Before you `ionic build` you should modify `platforms/android/AndroidManifest.xml` to `android:minSdkVersion="16"` and `android:targetSdkVersion="22"`
