@@ -17,11 +17,18 @@ else
 fi
 }
 
-case "$1" in
+VERB="${1:-}"
+
+case "$VERB" in
 	bash)
 	cat <<dog
 ionic(){
-	docker run --rm -t -i -v \$PWD:/myapp -p 8100:8100 -p 35729:35729 brimstone/ionic "\$@"
+	docker run --rm -t -i \
+	-e DISPLAY=unix\$DISPLAY \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+	-v \$PWD:/myapp \
+	-p 8100:8100 -p 35729:35729 \
+	brimstone/ionic "\$@"
 }
 dog
 exit
@@ -29,11 +36,16 @@ exit
 	root)
 	exec /bin/bash
 	;;
-	-)
+	"")
 	exec su ionic -c /bin/bash
+	;;
+	start)
+	cd /myapp
+	ionic "$@"
 	;;
 	*)
 	mkuser
 	cd /myapp
 	exec su ionic -c "ionic $*"
+	;;
 esac
