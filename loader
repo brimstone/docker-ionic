@@ -33,7 +33,7 @@ ionic(){
 	-e "DISPLAY=unix\$DISPLAY" \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v "\$PWD:/myapp" \
-	-p 8100:8100 -p 35729:35729 \
+	\$([ "\$1" = "serve" ] && echo "-p 8100:8100 -p 35729:35729") \
 	brimstone/ionic "\$@"
 }
 dog
