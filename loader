@@ -10,9 +10,8 @@ mkuser() {
 if [ -d "/myapp" ]; then
 	uid=$(stat -c %u /myapp)
 	gid=$(stat -c %g /myapp)
-	chown -R "$uid:$gid" /myapp
-	groupadd -g "$gid" ionic || true
-	useradd -M -u "$uid" -g "$gid" -d /myapp ionic || true
+	groupadd -g "$gid" ionic
+	useradd -M -u "$uid" -g "$gid" -d /myapp ionic
 else
 	cat <<dog
 Usage:
