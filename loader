@@ -49,6 +49,8 @@ exit
 	*)
 	mkuser
 	cd /myapp
-	exec su ionic -c "ionic $*"
+	su ionic -c "ionic $*"
+	rm .ionic/ionic.config
+	rmdir .ionic
 	;;
 esac
