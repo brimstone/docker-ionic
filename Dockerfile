@@ -3,6 +3,9 @@ FROM brimstone/ubuntu:14.04
 EXPOSE 8100
 EXPOSE 35729
 
+LABEL org.label-schema.url=https://github.com/brimstone/docker-ionic \
+      org.label-schema.vcs-url=https://github.com/brimstone/docker-ionic.git
+
 ENTRYPOINT ["/loader"]
 
 # install packages we need on the system
