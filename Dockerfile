@@ -10,7 +10,7 @@ RUN dpkg --add-architecture i386 \
  && echo "deb [arch=i386] http://us.archive.ubuntu.com/ubuntu trusty main restricted multiverse universe" > /etc/apt/sources.list.d/i386.list \
  && echo "deb [arch=i386] http://us.archive.ubuntu.com/ubuntu trusty-updates main restricted multiverse universe" >> /etc/apt/sources.list.d/i386.list \
  && package --no-install-recommends nodejs wget npm openjdk-7-jdk ant libc6:i386 zlib1g:i386 libstdc++6:i386
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # fix up the node one
 RUN ln -s /usr/bin/nodejs /usr/bin/node
