@@ -19,7 +19,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 # install cordova and ionic
-RUN npm install -g cordova ionic
+RUN npm install -g cordova ionic lodash._shimkeys
 
 # install the android sdk
 RUN wget http://dl.google.com/android/android-sdk_r24.1.2-linux.tgz -O - | tar -C /opt -zx
