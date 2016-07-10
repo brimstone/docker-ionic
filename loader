@@ -15,7 +15,7 @@ if [ -d "/myapp" ]; then
 else
 	cat <<dog
 Usage:
-\$ eval "\$(docker run --rm brimstone/ionic bash")"
+\$ eval "\$(docker run --rm brimstone/ionic bash)"
 
 Then use \`ionic\` as normal.
 dog
